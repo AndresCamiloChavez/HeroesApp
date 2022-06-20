@@ -5,6 +5,10 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
 
 const routes: Routes = [
   {
+    path: '',
+    component: ErrorPageComponent
+  },
+  {
     path: '404',
     component: ErrorPageComponent,
   },

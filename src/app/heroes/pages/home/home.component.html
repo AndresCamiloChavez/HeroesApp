@@ -1,4 +1,46 @@
-<h1>Heroes Home</h1>
-<hr>
+<!-- <h1>Heroes Home</h1>
+<hr> -->
 <!-- Las rutas hijas del módulo -->
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
+
+<mat-sidenav-container fullscreen>
+  <mat-sidenav position="start" mode="side" #sidenav>
+    <mat-toolbar color="primary">
+      <span>Menú</span>
+      <span class="spacer"></span>
+
+          <button *ngIf="sidenav.opened" (click)="sidenav.toggle()" mat-icon-button>
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <mat-list>
+      <mat-nav-list>
+        <!-- el punto es porque ya se encuentra el componente osea en la ruta padre -->
+        <a (click)="sidenav.toggle()" mat-list-item routerLink="./listado">
+          <mat-icon mat-list-icon>label</mat-icon>
+          <span>Listado de Héroes</span>
+        </a>
+        <a (click)="sidenav.toggle()" mat-list-item routerLink="./agregar">
+          <mat-icon mat-list-icon>add</mat-icon>
+          <span>Añadir Héroe</span>
+        </a>
+        <a (click)="sidenav.toggle()" mat-list-item routerLink="./buscar">
+          <mat-icon mat-list-icon>search</mat-icon>
+          <span>Buscar Héroe</span>
+        </a>
+      </mat-nav-list>
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-toolbar>
+    <button *ngIf="!sidenav.opened" (click)="sidenav.toggle()" mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="spacer"></span>
+    <button mat-raised-button>LogOut</button>
+  </mat-toolbar>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>
