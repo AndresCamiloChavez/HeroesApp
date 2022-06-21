@@ -21,8 +21,8 @@ export class BuscarComponent implements OnInit {
   }
   buscando(){
     if(this.termino.length >0){
-      this.heroeService.getSugerencias(this.termino).subscribe(data => {
-        this.heroes = data;
+      this.heroeService.getSugerencias(this.termino).subscribe((data) => {
+        this.heroes = data as Heroe[];
       })
     }else{
       this.heroes = [];
@@ -30,10 +30,12 @@ export class BuscarComponent implements OnInit {
     
   }
   opcionSeleccionada(event: MatAutocompleteSelectedEvent ){
-    this.heroeService.getHeroeById(event.option.value.id).subscribe(heroe =>{
-      this.heroeSeleccionado = heroe;
-    })
-    this.router.navigate(['/heroes/'+event.option.value.id]);
+    if(event.option.value){
+      this.heroeService.getHeroeById(event.option.value.id).subscribe(heroe =>{
+        this.heroeSeleccionado = heroe;
+        this.router.navigate(['/heroes/'+event.option.value.id]);
+      })
+    }
 
     
   }
