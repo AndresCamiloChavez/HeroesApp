@@ -9,6 +9,8 @@ import { HeroesRoutingModule } from './heroes-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material/material.module';
 import { HeroeTarjetaComponent } from './components/heroe-tarjeta/heroe-tarjeta.component';
+import { ImagenHeroePipe } from './pipes/imagen-heroe.pipe';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -19,13 +21,15 @@ import { HeroeTarjetaComponent } from './components/heroe-tarjeta/heroe-tarjeta.
     HeroeComponent,
     HomeComponent,
     ListadoComponent,
-    HeroeTarjetaComponent
+    HeroeTarjetaComponent,
+    ImagenHeroePipe
   ],
   imports: [
     CommonModule,
     HeroesRoutingModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule 
   ]
 })
 export class HeroesModule { }
