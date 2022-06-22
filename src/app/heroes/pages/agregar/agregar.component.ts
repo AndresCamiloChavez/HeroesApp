@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Heroe, Publisher } from '../../interfaces/heroes.interface';
 import { HeroesService } from '../../services/heroes.service';
-import { catchError, switchMap } from 'rxjs';
+import {  of, switchMap } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmarComponent } from '../../components/confirmar/confirmar.component';
 
 @Component({
   selector: 'app-agregar',
@@ -34,7 +36,8 @@ export class AgregarComponent implements OnInit {
     private params: ActivatedRoute,
     private heroeService: HeroesService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -67,15 +70,23 @@ export class AgregarComponent implements OnInit {
     }
   }
   borrarHeore(){
-    this.heroeService.borrarHeroe(this.heroe.id!).subscribe(data =>{
-      this.router.navigate(['/heroes/listado']);
+    const valueDialog = this.dialog.open(ConfirmarComponent, {width: '250px',data: {...this.heroe}});
+
+    valueDialog.afterClosed().pipe(
+      switchMap((result) =>{
+        if(result){
+          return this.heroeService.borrarHeroe(this.heroe.id!)
+        }
+        return of([{}])
+      } )
+    ).subscribe( _ =>{
+      this.router.navigate(['heroes/listado'])
     })
   }
   mostarSnackBar(mensaje: string){
     this.snackBar.open(mensaje,'ok!', {
       duration: 2600,
-
-    })
+    });
 
   }
 }
