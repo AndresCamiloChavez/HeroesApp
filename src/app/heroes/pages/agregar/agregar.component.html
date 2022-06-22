@@ -59,10 +59,18 @@
     {{ heroe | json }}
 
     <br />
-    <button (click)="guardar()" mat-raised-button color="primary">
-      <mat-icon>edit</mat-icon>
-      Guardar
-    </button>
+   
+    <div fxLayout="row">
+        <button (click)="guardar()" mat-raised-button color="primary">
+            <mat-icon>edit</mat-icon>
+            Guardar
+          </button>
+          <span class="spacer"></span>
+        <button *ngIf="heroe.id" (click)="borrarHeore()" mat-raised-button color="warn">
+          <mat-icon>remove</mat-icon>
+          Eliminar
+        </button>
+    </div>
   </div>
   <div fxFlex="50">
     <img [src]="heroe | imagenHeroe" alt="" />
