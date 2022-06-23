@@ -9,7 +9,7 @@
       <span>Menú</span>
       <span class="spacer"></span>
 
-          <button *ngIf="sidenav.opened" (click)="sidenav.toggle()" mat-icon-button>
+          <button  *ngIf="sidenav.opened" (click)="sidenav.toggle()" mat-icon-button>
         <mat-icon>close</mat-icon>
       </button>
     </mat-toolbar>
@@ -38,7 +38,8 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span class="spacer"></span>
-    <button mat-raised-button>LogOut</button>
+    <span>{{auth.usuario}}</span>
+    <button (click)="logOut()" mat-raised-button>LogOut</button>
   </mat-toolbar>
   <div class="container">
     <router-outlet></router-outlet>
